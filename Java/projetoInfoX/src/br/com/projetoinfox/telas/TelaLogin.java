@@ -24,9 +24,9 @@ public class TelaLogin extends javax.swing.JFrame {
         conexao = ModuloConexao.conector();
         //System.out.println(conexao);
         if (conexao != null){
-            lbStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projetoinfox/icones/dbConectado.png")));
+            lbStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projetoinfox/icones/dbOk.png")));
         } else {
-            lbStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projetoinfox/icones/dbDesconectado.png")));
+            lbStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projetoinfox/icones/dbOff.png")));
         }
             
     }
@@ -77,16 +77,21 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
 
-        lbStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projetoinfox/icones/dbConectado.png"))); // NOI18N
+        lbStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projetoinfox/icones/dbOff.png"))); // NOI18N
+        lbStatus.setText("Conexão ao Banco");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 173, Short.MAX_VALUE)
+                .addComponent(btLogin)
+                .addGap(138, 138, 138))
             .addGroup(layout.createSequentialGroup()
-                .addGap(69, 69, 69)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbLoginUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbSenhaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -95,15 +100,14 @@ public class TelaLogin extends javax.swing.JFrame {
                             .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
                             .addComponent(jTextField1)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbStatus)
-                        .addGap(43, 43, 43)
-                        .addComponent(btLogin)))
-                .addContainerGap(92, Short.MAX_VALUE))
+                        .addGap(25, 25, 25)
+                        .addComponent(lbStatus)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+                .addContainerGap(42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbLoginUsuario, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -111,13 +115,11 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbSenhaUsuario))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(lbStatus))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btLogin))))
+                .addGap(18, 18, 18)
+                .addComponent(btLogin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbStatus)
+                .addGap(8, 8, 8))
         );
 
         pack();
