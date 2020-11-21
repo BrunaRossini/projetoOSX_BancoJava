@@ -18,8 +18,10 @@ describe tbusuarios;
 insert into tbusuarios (iduser,usuario,telefone,login,senha) values (1,'Ivania Lilia','9999-9999','vcardoso','mudar123');
 insert into tbusuarios (iduser,usuario,telefone,login,senha) values (2,'Luis Claudio','9999-9999','lrossini','mudar123');
 insert into tbusuarios (iduser,usuario,telefone,login,senha) values (3,'Administrador','9999-9999','useradm','adm');
+insert into tbusuarios (iduser,usuario,telefone,login,senha) values (4,'Bruna Rossini','9999-9999','brossini','123');
 select * from tbusuarios;
 
+update tbusuarios set telefone='11 98604-0405' where iduser=4;
 update tbusuarios set telefone='8888-8888' where iduser=2;
 
 create table tbclientes (
