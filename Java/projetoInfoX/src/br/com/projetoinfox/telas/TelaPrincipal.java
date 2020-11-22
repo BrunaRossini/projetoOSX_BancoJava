@@ -5,7 +5,8 @@
  */
 package br.com.projetoinfox.telas;
 
-import java.text.DateFormat;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -63,7 +64,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Desktop.setLayout(DesktopLayout);
         DesktopLayout.setHorizontalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 850, Short.MAX_VALUE)
+            .addGap(0, 874, Short.MAX_VALUE)
         );
         DesktopLayout.setVerticalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -72,7 +73,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         lbIconeTelaPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projetoinfox/icones/TSLogoAlterado.png"))); // NOI18N
 
-        lbUsuario.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lbUsuario.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lbUsuario.setText("Usuário");
 
         lbData.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -113,6 +114,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 mnAjudaActionPerformed(evt);
             }
         });
+        mnAjuda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                mnAjudaKeyPressed(evt);
+            }
+        });
 
         miSobre.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.ALT_MASK));
         miSobre.setText("Sobre");
@@ -134,6 +140,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 miSairActionPerformed(evt);
             }
         });
+        miSair.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                miSairKeyPressed(evt);
+            }
+        });
         mnOpcoes.add(miSair);
 
         mbBarra.add(mnOpcoes);
@@ -147,21 +158,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(307, 307, 307)
                         .addComponent(jLabel1)
                         .addGap(72, 72, 72))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbData)
-                            .addComponent(lbUsuario)
-                            .addComponent(lbHora))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbIconeTelaPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbHora)
+                            .addComponent(lbData)
+                            .addComponent(lbUsuario))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,34 +182,36 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(lbUsuario)
                 .addGap(46, 46, 46)
                 .addComponent(lbData)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbHora)
-                .addGap(40, 40, 40)
+                .addGap(47, 47, 47)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
                 .addComponent(lbIconeTelaPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(1233, 640));
+        setSize(new java.awt.Dimension(1253, 640));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         //Substituir a label lbData pela data atual 
         Date data = new Date();
-        Date hora = new Date();        
-        DateFormat formatadorData = DateFormat.getDateInstance(DateFormat.LONG);
-        lbData.setText(formatadorData.format(data)); 
-        SimpleDateFormat formatadorHora =  new SimpleDateFormat ("kk:mm:ss");
-        lbHora.setText(formatadorHora.format(hora)); 
-               
+        Date hora = new Date();
+        SimpleDateFormat formatadorData = new SimpleDateFormat("EEE, d MMM, YYYY");
+        lbData.setForeground(new Color(70, 130, 180));
+        lbData.setText(formatadorData.format(data));
+        SimpleDateFormat formatadorHora = new SimpleDateFormat("kk:mm:ss");
+        lbHora.setForeground(new Color(70, 130, 180));
+        lbHora.setText(formatadorHora.format(hora));
+
     }//GEN-LAST:event_formWindowActivated
 
     private void miSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSairActionPerformed
         //Exibir caixa de diálogo
-        int sair = JOptionPane.showConfirmDialog(null,"Sair do Sistema?","Atenção",JOptionPane.YES_NO_OPTION);
-        if (sair == JOptionPane.YES_OPTION){
+        int sair = JOptionPane.showConfirmDialog(null, "Sair do Sistema?", "Atenção", JOptionPane.YES_NO_OPTION);
+        if (sair == JOptionPane.YES_OPTION) {
             System.exit(0); // Encerrar o sistema            
         }
     }//GEN-LAST:event_miSairActionPerformed
@@ -213,9 +226,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaSobre.setVisible(true);
     }//GEN-LAST:event_miSobreActionPerformed
 
+    private void miSairKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_miSairKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) 
+            System.exit(0);
+    }//GEN-LAST:event_miSairKeyPressed
+
+    private void mnAjudaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mnAjudaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) 
+           dispose();
+    }//GEN-LAST:event_mnAjudaKeyPressed
+
     /**
-     * @param args the command line arguments
-     */
+         * @param args the command line arguments
+         */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -254,7 +277,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lbData;
     private javax.swing.JLabel lbHora;
     private javax.swing.JLabel lbIconeTelaPrincipal;
-    private javax.swing.JLabel lbUsuario;
+    public static javax.swing.JLabel lbUsuario;
     private javax.swing.JMenuBar mbBarra;
     private javax.swing.JMenuItem miCliente;
     private javax.swing.JMenuItem miOrdemServico;
@@ -265,6 +288,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu mnAjuda;
     private javax.swing.JMenu mnCadastro;
     private javax.swing.JMenu mnOpcoes;
-    public javax.swing.JMenu mnRelatorio;
+    public static javax.swing.JMenu mnRelatorio;
     // End of variables declaration//GEN-END:variables
 }

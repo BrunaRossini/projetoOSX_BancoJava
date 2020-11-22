@@ -7,6 +7,8 @@ package br.com.projetoinfox.telas;
 
 import java.sql.*;
 import br.com.projetoinfox.dal.ModuloConexao;
+import com.sun.glass.events.KeyEvent;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,13 +28,27 @@ public class TelaLogin extends javax.swing.JFrame {
             pst.setString(1, tfUsuarioLogin.getText());
             pst.setString(2, tfSenhaLogin.getText());// campo especial
             rs = pst.executeQuery();
+            //validação de usuário na base de dados por perfil 
             if (rs.next()) {
                 TelaPrincipal telaPrincipal = new TelaPrincipal();
+                TelaPrincipal.lbUsuario.setText(rs.getString(2));// campo usuario no banco de dados
                 telaPrincipal.setVisible(true);
+                TelaPrincipal.lbUsuario.setForeground(new Color(70, 130, 180));
+                String perfil = rs.getString(6); // campo perfil no banco de dados
                 this.dispose(); //fechar a tela de login após usuário validado
                 conexao.close();
+                if (perfil.equals("adm")) {
+                    TelaPrincipal.mnRelatorio.setEnabled(true);
+                    TelaPrincipal.miUsuario.setEnabled(true);
+                    TelaPrincipal.lbUsuario.setForeground(Color.darkGray);
+                    this.dispose(); //fechar a tela de login após usuário validado
+                    conexao.close();
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "usuário e/ou senha inválido(s)!");
+                tfUsuarioLogin.setText("");
+                tfSenhaLogin.setText("");
+                tfUsuarioLogin.grabFocus();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -76,6 +92,11 @@ public class TelaLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TEC System - Login");
         setResizable(false);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         lbLoginUsuario.setText("Usuário");
 
@@ -93,10 +114,20 @@ public class TelaLogin extends javax.swing.JFrame {
                 btLoginActionPerformed(evt);
             }
         });
+        btLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btLoginKeyPressed(evt);
+            }
+        });
 
         tfSenhaLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfSenhaLoginActionPerformed(evt);
+            }
+        });
+        tfSenhaLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfSenhaLoginKeyPressed(evt);
             }
         });
 
@@ -150,6 +181,7 @@ public class TelaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
+        getRootPane().setDefaultButton(btLogin);
         logar();
     }//GEN-LAST:event_btLoginActionPerformed
 
@@ -160,6 +192,24 @@ public class TelaLogin extends javax.swing.JFrame {
     private void tfUsuarioLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUsuarioLoginActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfUsuarioLoginActionPerformed
+
+    private void tfSenhaLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSenhaLoginKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            logar();
+        }
+    }//GEN-LAST:event_tfSenhaLoginKeyPressed
+
+    private void btLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btLoginKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            logar();
+        }
+    }//GEN-LAST:event_btLoginKeyPressed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            logar();
+        }
+    }//GEN-LAST:event_formKeyPressed
 
     /**
      * @param args the command line arguments

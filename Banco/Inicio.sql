@@ -62,7 +62,13 @@ from tbordemservico as O inner join tbclientes as C
 -- quando for igual o id do cliente em ambas as tabelas. 
 on (O.idclient = C.idclient);
 
-
-
+describe tbusuarios;
+select * from tbusuarios;
+-- adicionar campo de perfil na tabela tbusuarios
+alter table tbusuarios add column perfil varchar(20) not null;
+update tbusuarios set perfil="adm" where iduser=3;
+update tbusuarios set perfil="adm" where iduser=4;
+update tbusuarios set perfil="user" where iduser=1;
+update tbusuarios set perfil="user" where iduser=2;
 
 
