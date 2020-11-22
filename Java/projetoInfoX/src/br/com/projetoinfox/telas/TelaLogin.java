@@ -145,7 +145,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 .addGap(8, 8, 8))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(384, 239));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
